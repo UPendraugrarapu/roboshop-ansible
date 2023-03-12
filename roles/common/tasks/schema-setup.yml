@@ -1,19 +1,27 @@
-    # if [ "${schema_type}" == "mongo" ]; then
-    #     print_head "copy mongodb repo file server"
-    #     cp ${code_dir}/configs/mongodb.repo /etc/yum.repos.d/mongodb.repo &>>${log_file}
-    #     status_check $?
-    #     print_head "install mongodb"
-    #     yum install mongodb-org-shell -y &>>${log_file}
-    #     status_check $?
-    #     print_head "Load the schema"
-    #     mongo --host mongodb.devopsb71.tech </app/schema/${component}.js &>>${log_file}
-    #     status_check $?
-    # elif [ "${schema_type} "== "mysql" ]; then
-    #     print_head "Install mysql client"
-    #     yum install mysql -y &>>${log_file}
-    #     status_check $?
+- name: Mongodb schema
+  when: schema_type == "mongo"
+  block:
+    - name: setup mongodb repos
+      ansible.builtin.copy:
+        src: mongodb.repo
+        dest: /etc/yum.repos.d/mongodb.repo
+     
 
-    #     print_head "Load schema"
-    #     mysql -h mysql.devopsb71.tech -uroot -p${mysql_root_password} </app/schema/${component}.sql &>>${log_file}
-    #     status_check $?
+    - name: Install mongodb client
+      ansible.builtin.yum: 
+        name: mongodb-org-shell
+        state: installed
+     
+    - name: Load the schema
+      ansible.builtin.shell:  mongo --host mongodb-dev.devopsb71.tech </app/schema/${{component}}.js
 
+- name: Mysql schema
+  when: schema_type == "mysql"
+  block:
+    - name: Install mysql client
+      ansible.builtin.yum:
+        name: mysql
+        state: installed
+
+    - name: Load the schema
+      ansible.builtin.shell:  mysql -h mysql-dev.devopsb71.tech -uroot -pRoboShop@1 </app/schema/${{component}}.sql
