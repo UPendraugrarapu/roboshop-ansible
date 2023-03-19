@@ -3,5 +3,6 @@
 
 - name: Install exporter
   ansible.builtin.import_role:
-      name: prometheus
-      tasks_from: exporter
+    name: prometheus
+    tasks_from: exporter
+  when: node_exporter
