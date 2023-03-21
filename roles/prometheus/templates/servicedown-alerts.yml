@@ -10,5 +10,5 @@ groups:
       severity: critical
       appName: {{ component.name }}
     annotations:
-      summary: service down on cart server- service name- {{ component.name }}.service
+      summary: service down on cart server- {{ component.name }}.service
   {% endfor %}
