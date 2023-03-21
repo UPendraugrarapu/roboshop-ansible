@@ -1,4 +1,6 @@
 components:
   - cart
   - catalogue
-  
+alert_files:
+  - servicedown-alerts.yml
+  - alerts.yml
