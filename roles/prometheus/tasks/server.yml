@@ -17,4 +17,17 @@
 
 - name: chaeck prometheus is started
   ansible.builtin.shell: netstat -lntp | grep 9090
+
+- name: update alertmanager config
+  ansible.builtin.template:
+    src: alertmanager.yml
+    dest: /opt/alertmanager/alertmanager.yml
+
+- name: restart alertmanager server
+  ansible.builtin.systemd:
+    name: alertmanager
+    state: restarted
+
+- name: chaeck alertmanager is started
+  ansible.builtin.shell: netstat -lntp | grep 9093
  
