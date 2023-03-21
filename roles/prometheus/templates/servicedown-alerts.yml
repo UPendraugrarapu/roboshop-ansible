@@ -8,7 +8,7 @@ groups:
     for: 30s
     labels:
       severity: critical
-      application: {{ component.name }}
+      appName: {{ component.name }}
     annotations:
       summary: service down on cart server- service name- {{ component.name }}.service
   {% endfor %}
