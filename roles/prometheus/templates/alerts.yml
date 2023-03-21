@@ -9,10 +9,12 @@ groups:
     annotations:
       summary: Serverdown
 
-- alert: High CPU usage
-  expr: 100 - (avg by(name) (rate(node_cpu_seconds_total{mode="idle"}[1m])) *100) > 80
-  for: 2m
-  labels:
-    severity: critical
-    annotations:
-      summary: Serverdown
+# By running below cpu usage code prometheus is going down
+
+# - alert: High CPU usage
+#   expr: 100 - (avg by(name) (rate(node_cpu_seconds_total{mode="idle"}[1m])) *100) > 80
+#   for: 2m
+#   labels:
+#     severity: critical
+#     annotations:
+#       summary: Serverdown
