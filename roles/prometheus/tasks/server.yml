@@ -14,4 +14,7 @@
   ansible.builtin.systemd:
     name: prometheus
     state: restarted
+
+- name: chaeck prometheus is started
+  ansibel.builtin.shell: netstat -lntp | grep 9090
  
