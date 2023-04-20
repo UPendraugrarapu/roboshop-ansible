@@ -11,9 +11,12 @@
    file: app-prereq.yml
 
 - name: Install nodejs dependencies
-  community.general.npm:
-    path: /app
-
+  # community.general.npm:
+  #   path: /app
+  ansible.builtin.shell: npm install
+  args:
+     chdir: /app
+     
 - name: schema setup
   ansible.builtin.import_tasks:
    file: schema-setup.yml
