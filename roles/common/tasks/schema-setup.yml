@@ -12,8 +12,10 @@
         name: mongodb-org-shell
         state: installed
 
-    - name: Download mongodb PEM file
-
+#    - name: Download mongodb PEM file
+#      ansible.builtin.get_url:
+#        url: https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem
+#        dest: /app/rds-combined-ca-bundle.pem
 
     - name: Load the schema
       #ansible.builtin.shell:  mongo --host mongodb-dev.devopsb71.tech </app/schema/{{component}}.js
@@ -29,3 +31,4 @@
 
     - name: Load the schema
       ansible.builtin.shell:  mysql -h mysql-dev.devopsb71.tech -uroot -pRoboShop@1 </app/schema/{{component}}.sql
+
