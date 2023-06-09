@@ -1,16 +1,21 @@
-- name: Install maven
+#- name: Install maven
+#  ansible.builtin.yum:
+#    name: maven
+#    state: installed
+#since we are extracting app content from nexus we need to have this
+- name: Install Java
   ansible.builtin.yum:
-    name: maven
+    name: Java-17-openjdk
     state: installed
 
 - name: app-prepreq
   ansible.builtin.import_tasks:
    file: app-prereq.yml
 
-- name: Install maven dependencies
-  ansible.builtin.shell: mvn clean package; mv target/{{component}}-1.0.jar {{component}}.jar
-  args:
-    chdir: /app
+#- name: Install maven dependencies
+#  ansible.builtin.shell: mvn clean package; mv target/{{component}}-1.0.jar {{component}}.jar
+#  args:
+#    chdir: /app
 
 - name: schema setup
   ansible.builtin.import_tasks:
