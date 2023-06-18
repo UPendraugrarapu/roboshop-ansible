@@ -5,7 +5,7 @@
 #since we are extracting app content from nexus we need to have this
 - name: Install Java
   ansible.builtin.yum:
-    name: Java-17-openjdk
+    name: Java-11-openjdk
     state: installed
 
 - name: app-prepreq
